@@ -10,8 +10,8 @@ module Day9
     attr_accessor :value_list
 
     def initialize(test: false)
-      @file_name = (test === true ? "test_input.txt" : "input.txt")
-      @target = (test === true ? 127 : 1_309_761_972)
+      @file_name = (test == true ? "test_input.txt" : "input.txt")
+      @target = (test == true ? 127 : 1_309_761_972)
       @value_list = [data.shift]
     end
 
@@ -27,10 +27,9 @@ module Day9
     end
 
     def process_value_list
-      sum = value_list.sum
-      return value_list.min + value_list.max if sum == target
+      return value_list.min + value_list.max if value_sum == target
 
-      if sum > target
+      if value_sum > target
         value_list.shift
       else
         return "No value found" if data.empty?
@@ -39,6 +38,10 @@ module Day9
       end
 
       process_value_list
+    end
+
+    def value_sum
+      value_list.sum
     end
   end
 end
